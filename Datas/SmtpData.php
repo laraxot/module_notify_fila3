@@ -9,8 +9,10 @@ use Modules\Tenant\Services\TenantService;
 use Spatie\LaravelData\Data;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport;
-use Symfony\Component\Mailer\Mailer;
 
+/**
+ * Class Modules\Notify\Datas\SmtpData.
+ */
 class SmtpData extends Data
 {
     public string $transport = 'smtp';
