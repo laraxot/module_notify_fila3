@@ -39,6 +39,7 @@
         }
     },
     "require": {
+        "aws/aws-sdk-php": "*",
         "filament/filament": "*",
         "illuminate/contracts": "*",
         "illuminate/support": "*",
