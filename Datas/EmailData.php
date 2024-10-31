@@ -7,6 +7,7 @@ namespace Modules\Notify\Datas;
 use Spatie\LaravelData\Data;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email as MimeEmail;
+use Webmozart\Assert\Assert;
 
 class EmailData extends Data
 {
@@ -20,7 +21,7 @@ class EmailData extends Data
 
     public string $body_html;
 
-    public ?string $body=null;
+    public ?string $body = null;
 
     /*
     public function __construct(
@@ -42,16 +43,16 @@ class EmailData extends Data
 
     public function getFrom(): Address
     {
-        $fromEmail = $this->from_email ?? config('mail.from.address');
-        $fromName = $this->from ?? config('mail.from.name', 'No-Reply');
+        Assert::string($fromEmail = $this->from_email ?? config('mail.from.address'));
+        Assert::string($fromName = $this->from ?? config('mail.from.name', 'No-Reply'));
 
         return new Address($fromEmail, $fromName);
     }
 
     public function getMimeEmail(): MimeEmail
     {
-        if($this->body==null){
-            $this->body=strip_tags($this->body_html);
+        if (null == $this->body) {
+            $this->body = strip_tags($this->body_html);
         }
         $email = (new MimeEmail())
             ->from($this->getFrom())

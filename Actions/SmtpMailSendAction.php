@@ -13,8 +13,10 @@ use Webmozart\Assert\Assert;
 
 class SmtpMailSendAction
 {
-    public function execute(string $to,string $subject, string $body): void
+    public function execute(string $to, string $subject, string $body): void
     {
+        dddx('WIP');
+        /*
         $smtpData = SmtpData::make();
         $transport = $smtpData->getTransport();
 
@@ -48,5 +50,6 @@ class SmtpMailSendAction
         } catch (\Exception $e) {
             throw new \Exception("Errore durante l'invio dell'email: ".$e->getMessage());
         }
+        */
     }
 }

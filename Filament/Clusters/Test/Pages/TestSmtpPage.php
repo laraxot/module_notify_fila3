@@ -4,26 +4,23 @@ declare(strict_types=1);
 
 namespace Modules\Notify\Filament\Clusters\Test\Pages;
 
-use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Pages\Page;
-use Illuminate\Support\Arr;
 use Filament\Actions\Action;
-use Webmozart\Assert\Assert;
 use Filament\Facades\Filament;
-use Modules\Xot\Datas\XotData;
-use Symfony\Component\Mime\Email;
-use Modules\Notify\Datas\SmtpData;
-use Modules\Notify\Datas\EmailData;
-use Symfony\Component\Mime\Address;
-use Symfony\Component\Mailer\Mailer;
+use Filament\Forms;
 use Filament\Forms\Components\Section;
-use Filament\Forms\Contracts\HasForms;
-use Illuminate\Database\Eloquent\Model;
-use Filament\Notifications\Notification;
-use Modules\Notify\Filament\Clusters\Test;
-use Illuminate\Contracts\Auth\Authenticatable;
 use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
+use Filament\Forms\Form;
+use Filament\Notifications\Notification;
+use Filament\Pages\Page;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
+use Modules\Notify\Datas\EmailData;
+use Modules\Notify\Datas\SmtpData;
+use Modules\Notify\Filament\Clusters\Test;
+use Modules\Xot\Datas\XotData;
+use Webmozart\Assert\Assert;
 
 class TestSmtpPage extends Page implements HasForms
 {
@@ -43,9 +40,8 @@ class TestSmtpPage extends Page implements HasForms
 
     public function emailForm(Form $form): Form
     {
-        $smtpConfig = Arr::get(config('mail'),'mailers.smtp');
-
-       
+        Assert::isArray($mail_config = config('mail'));
+        $smtpConfig = Arr::get($mail_config, 'mailers.smtp');
 
         $this->emailData['subject'] = 'test';
         $defaultEmail = XotData::make()->super_admin;
@@ -102,7 +98,6 @@ class TestSmtpPage extends Page implements HasForms
         $smtp = SmtpData::from($data);
         $emailData = EmailData::from($data);
         $smtp->send($emailData);
-        
 
         Notification::make()
             ->success()
