@@ -1,4 +1,3 @@
-use Modules\Notify\Datas\EmailData;
 {{--
 <x-mail::message>
 # Introduction
@@ -13,4 +12,4 @@ Thanks,<br>
 {{ config('app.name') }}
 </x-mail::message>
 --}}
-testo di prova
+{!! body_html !!}

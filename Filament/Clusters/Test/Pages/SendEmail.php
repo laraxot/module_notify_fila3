@@ -52,13 +52,13 @@ class SendEmail extends Page implements HasForms
                         // ->description('Update your account\'s profile information and email address.')
                         ->schema(
                             [
-                                Forms\Components\TextInput::make('email_to')
+                                Forms\Components\TextInput::make('to')
                                     // ->unique(ignoreRecord: true)
                                     ->email()
                                     ->required(),
                                 Forms\Components\TextInput::make('subject')
                                     ->required(),
-                                Forms\Components\RichEditor::make('body')
+                                Forms\Components\RichEditor::make('body_html')
                                     ->required(),
                             ]
                         ),
@@ -72,8 +72,9 @@ class SendEmail extends Page implements HasForms
     {
         $data = $this->emailForm->getState();
         $email_data = EmailData::from($data);
+        
 
-        Mail::to($data['email_to'])->send(
+        Mail::to($data['to'])->send(
             new EmailDataEmail($email_data)
         );
 

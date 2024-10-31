@@ -35,6 +35,11 @@ class EmailDataEmail extends Mailable
     {
         return new Content(
             view: 'notify::emails.email-data-email',
+            // Passiamo i dati da utilizzare nella vista
+            with: [
+                'body_html' => $this->email_data->body_html,
+                'body' => $this->email_data->body,
+            ]
         );
     }
 
