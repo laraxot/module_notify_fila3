@@ -28,7 +28,7 @@ class MailService
     public static function getInstance(): self
     {
         if (! self::$instance instanceof self) {
-            self::$instance = new self;
+            self::$instance = new self();
         }
 
         return self::$instance;
@@ -61,7 +61,7 @@ class MailService
      */
     public function send(): self
     {
-        $class = '\Modules\Notify\Services\MailEngines\\'.Str::studly($this->driver).'Engine';
+        $class = '\Modules\Notify\Services\MailEngines\\' . Str::studly($this->driver) . 'Engine';
         $class::make()
             ->setLocalVars($this->vars)
             ->send();
@@ -74,7 +74,7 @@ class MailService
      */
     public function try(): self
     {
-        $class = '\Modules\Notify\Services\MailEngines\\'.Str::studly($this->driver).'Engine';
+        $class = '\Modules\Notify\Services\MailEngines\\' . Str::studly($this->driver) . 'Engine';
         $class::make()
             ->setLocalVars($this->vars)
             ->try();

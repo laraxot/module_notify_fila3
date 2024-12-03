@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Modules\Notify\Filament\Clusters\Test\Pages;
 
-use Exception;
 use Filament\Actions\Action;
 use Filament\Facades\Filament;
 use Filament\Forms;
@@ -28,6 +27,7 @@ use Modules\Xot\Filament\Traits\NavigationLabelTrait;
 class SendEmail extends Page implements HasForms
 {
     use InteractsWithForms;
+
     // use NavigationLabelTrait;
 
     public ?array $emailData = [];
@@ -52,13 +52,13 @@ class SendEmail extends Page implements HasForms
                         // ->description('Update your account\'s profile information and email address.')
                         ->schema(
                             [
-                                Forms\Components\TextInput::make('email_to')
+                                Forms\Components\TextInput::make('to')
                                     // ->unique(ignoreRecord: true)
                                     ->email()
                                     ->required(),
                                 Forms\Components\TextInput::make('subject')
                                     ->required(),
-                                Forms\Components\RichEditor::make('body')
+                                Forms\Components\RichEditor::make('body_html')
                                     ->required(),
                             ]
                         ),
@@ -73,7 +73,8 @@ class SendEmail extends Page implements HasForms
         $data = $this->emailForm->getState();
         $email_data = EmailData::from($data);
 
-        Mail::to($data['email_to'])->send(
+
+        Mail::to($data['to'])->send(
             new EmailDataEmail($email_data)
         );
 
@@ -106,7 +107,7 @@ class SendEmail extends Page implements HasForms
         $user = Filament::auth()->user();
 
         if (! $user instanceof Model) {
-            throw new Exception('The authenticated user object must be an Eloquent model to allow the profile page to update it.');
+            throw new \Exception('The authenticated user object must be an Eloquent model to allow the profile page to update it.');
         }
 
         return $user;

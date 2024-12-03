@@ -31,6 +31,7 @@ use function Safe\json_encode;
 class SendPushNotification extends Page implements HasForms
 {
     use InteractsWithForms;
+
     // use NavigationLabelTrait;
 
     public ?array $notificationData = [];
@@ -60,7 +61,7 @@ class SendPushNotification extends Page implements HasForms
         /**
          * ---.
          */
-        $callback = fn ($item) => [$item->push_notifications_token => $item->profile->full_name.' ('.$item->device?->robot.') '.mb_substr($item->push_notifications_token, -5)];
+        $callback = fn ($item) => [$item->push_notifications_token => $item->profile->full_name . ' (' . $item->device?->robot . ') ' . mb_substr($item->push_notifications_token, -5)];
 
         /**
          * ---.

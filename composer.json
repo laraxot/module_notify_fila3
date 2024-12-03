@@ -39,6 +39,7 @@
         }
     },
     "require": {
+        "aws/aws-sdk-php": "*",
         "filament/filament": "*",
         "illuminate/contracts": "*",
         "illuminate/support": "*",
@@ -46,36 +47,11 @@
         "kreait/laravel-firebase": "*",
         "laravel-notification-channels/telegram": "^5.0",
         "phpdocumentor/type-resolver": "*",
-        "thecodingmachine/safe": "^2.5"
+        "symfony/http-client": "*",
+        "symfony/postmark-mailer": "*"
     },
-    "require_comment": {
-        "laraxot/module_media_fila3": "*",
-        "laraxot/module_xot_fila3": "*"
-    },
-    "require-dev_comment": {
-        "barryvdh/laravel-ide-helper": "*",
-        "driftingly/rector-laravel": "^0.26.2",
-        "enlightn/enlightn": "^2.7",
-        "fakerphp/faker": "*",
-        "friendsofphp/php-cs-fixer": "*",
-        "larastan/larastan": "^2.7",
-        "laravel/pint": "^1.13",
-        "nesbot/carbon": "*",
-        "nette/php-generator": "*",
-        "nunomaduro/phpinsights": "^2.11",
-        "orchestra/testbench": "^9.4",
-        "pestphp/pest": "*",
-        "pestphp/pest-plugin-laravel": "*",
-        "phpunit/phpunit": "*",
-        "rector/rector": "*",
-        "spatie/laravel-typescript-transformer": "*",
-        "spatie/pest-plugin-snapshots": "*",
-        "spatie/phpunit-snapshot-assertions": "*",
-        "spatie/test-time": "*",
-        "symplify/phpstan-rules": "*",
-        "thecodingmachine/phpstan-safe-rule": "^1.2",
-        "tightenco/duster": "^2.2",
-        "vimeo/psalm": "*"
+    "require-dev": {
+        
     },
     "repositories": [
         {
@@ -92,7 +68,7 @@
         }
     ],
     "scripts": {
-        "post-autoload-dump": [
+        "post-autoload-dump1": [
             "@php vendor/bin/testbench package:discover --ansi"
         ],
         "post-update-cmd": [

@@ -57,6 +57,7 @@ class TestNotification extends Notification {
         */
         // dddx($notifiable);
         return (new MailMessage())
+            ->template('user::notifications.email')
                     // ->to('marco76tv@hotmail.com')
                     // ->from('barrett@example.com', 'Barrett Blair')
                     // ->subject('Invoice Payment Failed')

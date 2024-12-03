@@ -11,29 +11,17 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Tables\Enums\ActionsPosition;
+use Modules\Xot\Filament\Traits\HasXotTable;
 use Filament\Tables\Actions\DeleteBulkAction;
+use Modules\Xot\Filament\Pages\XotBaseListRecords;
 use Modules\Notify\Filament\Resources\ContactResource;
 use Modules\UI\Filament\Actions\Table\TableLayoutToggleTableAction;
 
-class ListContacts extends ListRecords
+class ListContacts extends XotBaseListRecords
 {
-    public TableLayoutEnum $layoutView = TableLayoutEnum::LIST;
+   
 
     protected static string $resource = ContactResource::class;
-
-    protected function getTableHeaderActions(): array
-    {
-        return [
-            TableLayoutToggleTableAction::make(),
-        ];
-    }
-
-    protected function getHeaderActions(): array
-    {
-        return [
-            CreateAction::make(),
-        ];
-    }
 
     public function table(Table $table): Table
     {
@@ -79,6 +67,20 @@ class ListContacts extends ListRecords
     {
         return [
             DeleteBulkAction::make(),
+        ];
+    }
+
+    protected function getTableHeaderActions(): array
+    {
+        return [
+            TableLayoutToggleTableAction::make(),
+        ];
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            CreateAction::make(),
         ];
     }
 }

@@ -9,8 +9,7 @@ use Modules\Xot\Database\Migrations\XotBaseMigration;
 /*
  * Class CreateThemesTable.
  */
-return new class extends XotBaseMigration
-{
+return new class() extends XotBaseMigration {
     // use XotBaseMigrationTrait;
     /**
      * Run the migrations.
@@ -33,15 +32,6 @@ return new class extends XotBaseMigration
             function (Blueprint $table): void {
                 if (! $this->hasColumn('from')) {
                     $table->string('from')->nullable();
-                }
-
-                if (! $this->hasColumn('updated_at')) {
-                    $table->timestamps();
-                }
-
-                if (! $this->hasColumn('updated_by')) {
-                    $table->string('updated_by')->nullable()->after('updated_at');
-                    $table->string('created_by')->nullable()->after('created_at');
                 }
 
                 if (! $this->hasColumn('post_type')) {
@@ -73,8 +63,9 @@ return new class extends XotBaseMigration
                 }
 
                 if (! $this->hasColumn('view_params')) {
-                    $table->json('view_params');
+                    $table->json('view_params')->nullable();
                 }
+                $this->updateTimestamps(table: $table, hasSoftDeletes: true);
             }
         ); // end update
     }

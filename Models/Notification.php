@@ -192,6 +192,7 @@ use Illuminate\Support\Carbon;
  *
  * @mixin \Eloquent
  *
+
  * @method static DatabaseNotificationCollection<int, static> all($columns = ['*'])
  * @method static DatabaseNotificationCollection<int, static> get($columns = ['*'])
  * @method static DatabaseNotificationCollection<int, static> all($columns = ['*'])

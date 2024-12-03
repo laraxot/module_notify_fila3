@@ -26,6 +26,5 @@ class NetfunChannel
         $data['sms_count'] = (int) $notifiable->sms_count + 1;
         $notifiable->update($data);
         */
-
     }
 }

@@ -14,30 +14,14 @@ use Filament\Resources\Pages\ListRecords;
 use Filament\Tables\Enums\ActionsPosition;
 use Modules\Xot\Filament\Traits\TransTrait;
 use Filament\Tables\Actions\DeleteBulkAction;
+use Modules\Xot\Filament\Pages\XotBaseListRecords;
 use Modules\Notify\Filament\Resources\NotificationResource;
 use Modules\UI\Filament\Actions\Table\TableLayoutToggleTableAction;
 
-class ListNotifications extends ListRecords
+class ListNotifications extends XotBaseListRecords
 {
-    use TransTrait;
-
-    public TableLayoutEnum $layoutView = TableLayoutEnum::LIST;
-
+    
     protected static string $resource = NotificationResource::class;
-
-    protected function getTableHeaderActions(): array
-    {
-        return [
-            TableLayoutToggleTableAction::make(),
-        ];
-    }
-
-    protected function getHeaderActions(): array
-    {
-        return [
-            CreateAction::make(),
-        ];
-    }
 
     public function table(Table $table): Table
     {
@@ -71,7 +55,6 @@ class ListNotifications extends ListRecords
             TextColumn::make('type'),
         ];
     }
-    
     public function getTableActions(): array
     {
         return [
@@ -84,6 +67,20 @@ class ListNotifications extends ListRecords
     {
         return [
             DeleteBulkAction::make(),
+        ];
+    }
+
+    protected function getTableHeaderActions(): array
+    {
+        return [
+            TableLayoutToggleTableAction::make(),
+        ];
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            CreateAction::make(),
         ];
     }
 }

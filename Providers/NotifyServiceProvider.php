@@ -15,8 +15,9 @@ class NotifyServiceProvider extends XotBaseServiceProvider
 
     protected string $module_ns = __NAMESPACE__;
 
-    public function bootCallback(): void
+    public function boot(): void
     {
+        parent::boot();
         // BladeService::registerComponents($this->module_dir.'/../View/Components', 'Modules\\Media');
         // Notification::extend('esendex', function ($app) {
         //    return new \Modules\Notify\Notifications\Channels\EsendexChannel;

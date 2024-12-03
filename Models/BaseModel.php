@@ -4,20 +4,21 @@ declare(strict_types=1);
 
 namespace Modules\Notify\Models;
 
-// ---------- traits
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-// //use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Xot\Traits\Updater;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * Class BaseModel.
  */
-abstract class BaseModel extends Model
+abstract class BaseModel extends Model implements HasMedia
 {
     // use Searchable;
     use HasFactory;
+    use InteractsWithMedia;
     use Updater;
 
     /**
@@ -39,7 +40,7 @@ abstract class BaseModel extends Model
     protected $perPage = 30;
 
     /** @var string */
-    protected $connection = 'mysql';
+    protected $connection = 'notify';
 
     /** @var list<string> */
     protected $appends = [];
@@ -66,7 +67,7 @@ abstract class BaseModel extends Model
     }
 
     /** @return array<string, string> */
-    protected function casts(): array
+    public function casts(): array
     {
         return [
             'id' => 'string',

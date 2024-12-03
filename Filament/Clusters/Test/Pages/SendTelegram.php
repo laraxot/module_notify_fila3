@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @see https://medium.com/modulr/send-telegram-notifications-with-laravel-9-342cc87b406
  * @see https://laravel-notification-channels.com/telegram/#usage
@@ -33,16 +34,13 @@ use Webmozart\Assert\Assert;
 class SendTelegram extends Page implements HasForms
 {
     use InteractsWithForms;
+
     // use NavigationLabelTrait;
 
     public ?array $emailData = [];
-
     protected static ?string $navigationIcon = 'heroicon-o-paper-airplane';
-
     protected static string $view = 'notify::filament.pages.send-email';
-
     protected static ?string $cluster = Test::class;
-
     public function mount(): void
     {
         $this->fillForms();
@@ -58,20 +56,16 @@ class SendTelegram extends Page implements HasForms
         ]);
         */
         return $form
-            ->schema(
-                [
+            ->schema([
                     Forms\Components\Section::make()
                         // ->description('Update your account\'s profile information and email address.')
-                        ->schema(
-                            [
+                        ->schema([
                                 Forms\Components\TextInput::make('to')
                                     ->required(),
                                 Forms\Components\RichEditor::make('body')
                                     ->required(),
-                            ]
-                        ),
-                ]
-            )
+                            ]),
+                ])
             ->model($this->getUser())
             ->statePath('emailData');
     }
@@ -79,12 +73,10 @@ class SendTelegram extends Page implements HasForms
     public function sendEmail(): void
     {
         $data = $this->emailForm->getState();
-
         Assert::string($token = config('services.telegram-bot-api.token'));
-        $url = 'https://api.telegram.org/bot'.$token.'/getMe';
+        $url = 'https://api.telegram.org/bot' . $token . '/getMe';
         Http::get($url);
-
-        // dddx($response->json());
+// dddx($response->json());
         /*
          "ok" => true
             "result" => array:8 [▼
@@ -131,7 +123,6 @@ class SendTelegram extends Page implements HasForms
     protected function getUser(): Authenticatable&Model
     {
         $user = Filament::auth()->user();
-
         if (! $user instanceof Model) {
             throw new \Exception('The authenticated user object must be an Eloquent model to allow the profile page to update it.');
         }

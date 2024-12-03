@@ -6,8 +6,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Modules\Notify\Models\Contact;
 use Modules\Xot\Database\Migrations\XotBaseMigration;
 
-return new class extends XotBaseMigration
-{
+return new class() extends XotBaseMigration {
     protected ?string $model_class = Contact::class;
 
     /**
@@ -24,9 +23,6 @@ return new class extends XotBaseMigration
                 $table->string('value')->nullable();
                 $table->integer('user_id')->nullable();
                 $table->timestamp('verified_at')->nullable();
-                $table->timestamps();
-                $table->string('updated_by')->nullable();
-                $table->string('created_by')->nullable();
             }
         );
         $this->tableUpdate(
@@ -34,6 +30,7 @@ return new class extends XotBaseMigration
                 if (! $this->hasColumn('token')) {
                     $table->string('token')->nullable();
                 }
+                $this->updateTimestamps(table: $table, hasSoftDeletes: true);
             }
         );
     }
