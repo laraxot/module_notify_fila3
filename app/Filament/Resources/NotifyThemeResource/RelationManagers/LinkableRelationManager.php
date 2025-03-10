@@ -6,7 +6,7 @@ namespace Modules\Notify\Filament\Resources\NotifyThemeResource\RelationManagers
 
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
-use Modules\Xot\Filament\Resources\XotBaseResource\RelationManager\XotBaseRelationManager;
+use Modules\Xot\Filament\Resources\RelationManagers\XotBaseRelationManager;
 
 class LinkableRelationManager extends XotBaseRelationManager
 {
@@ -14,15 +14,12 @@ class LinkableRelationManager extends XotBaseRelationManager
 
     protected static ?string $recordTitleAttribute = 'id';
 
-    public function form(Form $form): Form
+    public function getFormSchema(): array
     {
-        return $form
-            ->schema(
-                [
-                    TextInput::make('id')
-                        ->required()
-                        ->maxLength(255),
-                ]
-            );
+        return [
+            TextInput::make('id')
+                ->required()
+                ->maxLength(255),
+        ];
     }
 }

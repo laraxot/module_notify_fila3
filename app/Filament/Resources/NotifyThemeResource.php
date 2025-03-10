@@ -19,7 +19,6 @@ class NotifyThemeResource extends XotBaseResource
 {
     protected static ?string $model = NotifyTheme::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-bell';
 
     public static function getFormSchema(): array
     {
@@ -59,14 +58,7 @@ class NotifyThemeResource extends XotBaseResource
         ];
     }
 
-    public static function getPages(): array
-    {
-        return [
-            'index' => ListNotifyThemes::route('/'),
-            'create' => CreateNotifyTheme::route('/create'),
-            'edit' => EditNotifyTheme::route('/{record}/edit'),
-        ];
-    }
+   
 
     public static function fieldOptions(string $field): array
     {

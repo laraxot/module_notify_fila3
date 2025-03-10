@@ -8,12 +8,12 @@ use Filament\Forms\Components\TextInput;
 use Modules\Notify\Filament\Resources\NotificationResource\Pages;
 use Modules\Notify\Models\Notification;
 use Modules\Xot\Filament\Resources\XotBaseResource;
+use Modules\Xot\Filament\Resources\RelationManagers\XotBaseRelationManager;
 
 class NotificationResource extends XotBaseResource
 {
     protected static ?string $model = Notification::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function getFormSchema(): array
     {
@@ -50,17 +50,5 @@ class NotificationResource extends XotBaseResource
         ];
     }
 
-    public static function getRelations(): array
-    {
-        return [
-        ];
-    }
-
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListNotifications::route('/'),
-            'view' => Pages\ViewNotification::route('/{record}'),
-        ];
-    }
+   
 }
