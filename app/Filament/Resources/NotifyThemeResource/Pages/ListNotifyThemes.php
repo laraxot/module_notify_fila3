@@ -52,11 +52,17 @@ class ListNotifyThemes extends XotBaseListRecords
     {
         return [
             'lang' => Filters\SelectFilter::make('lang')
-                ->options(NotifyThemeResource::fieldOptions('lang')),
+                ->options(function (): array {
+                    return NotifyThemeResource::fieldOptions('lang');
+                }),
             'post_type' => Filters\SelectFilter::make('post_type')
-                ->options(NotifyThemeResource::fieldOptions('post_type')),
+                ->options(function (): array {
+                    return NotifyThemeResource::fieldOptions('post_type');
+                }),
             'type' => Filters\SelectFilter::make('type')
-                ->options(NotifyThemeResource::fieldOptions('type'))
+                ->options(function (): array {
+                    return NotifyThemeResource::fieldOptions('type');
+                })
         ];
     }
 

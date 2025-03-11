@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Notify\Filament\Resources;
 
+use Filament\Forms\Components\Component;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Pages\PageRegistration;
 use Modules\Notify\Filament\Resources\ContactResource\Pages;
@@ -16,19 +17,24 @@ class ContactResource extends XotBaseResource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    /**
+     * Get the form schema for the resource.
+     *
+     * @return array<string, Component>
+     */
     public static function getFormSchema(): array
     {
         return [
-            TextInput::make('name')
+            'name' => TextInput::make('name')
                 ->hint(static::trans('fields.name.hint'))
                 ->required()
                 ->maxLength(255),
-            TextInput::make('email')
+            'email' => TextInput::make('email')
                 ->hint(static::trans('fields.email.hint'))
                 ->email()
                 ->required()
                 ->maxLength(255),
-            TextInput::make('phone')
+            'phone' => TextInput::make('phone')
                 ->hint(static::trans('fields.phone.hint'))
                 ->tel()
                 ->maxLength(255),

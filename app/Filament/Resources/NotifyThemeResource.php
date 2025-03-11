@@ -24,11 +24,17 @@ class NotifyThemeResource extends XotBaseResource
     {
         return [
             'lang' => Select::make('lang')
-                ->options(self::fieldOptions('lang')),
+                ->options(function (): array {
+                    return self::fieldOptions('lang');
+                }),
             'type' => Select::make('type')
-                ->options(self::fieldOptions('type')),
+                ->options(function (): array {
+                    return self::fieldOptions('type');
+                }),
             'post_type' => Select::make('post_type')
-                ->options(self::fieldOptions('post_type')),
+                ->options(function (): array {
+                    return self::fieldOptions('post_type');
+                }),
             'post_id' => TextInput::make('post_id'),
             'subject' => TextInput::make('subject'),
             'from' => TextInput::make('from'),
