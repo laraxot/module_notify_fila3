@@ -168,29 +168,36 @@ class SendPushNotification extends Page implements HasForms
         $jsonData = $jsonData ?: '{}';
         
         // Creiamo un array con chiavi non vuote e valori stringa che implementano Stringable
-        /** @var array<non-empty-string, \Stringable|string> $pushData */
-        $pushData = [];
+        $pushDataTemp = [];
         
         // Aggiungiamo i valori all'array solo se non sono vuoti
         if ($type !== '') {
-            $pushData['type'] = $type;
+            $pushDataTemp['type'] = $type;
         }
         if ($title !== '') {
-            $pushData['title'] = $title;
+            $pushDataTemp['title'] = $title;
         }
         if ($body !== '') {
-            $pushData['body'] = $body;
+            $pushDataTemp['body'] = $body;
         }
         if ($jsonData !== '') {
-            $pushData['data'] = $jsonData;
+            $pushDataTemp['data'] = $jsonData;
         }
+        
+        // Verifichiamo che l'array non sia vuoto
+        if (empty($pushDataTemp)) {
+            $pushDataTemp['type'] = 'notification';
+        }
+        
+        // Creiamo un MessageData object
+        $messageData = new \Kreait\Firebase\Messaging\MessageData($pushDataTemp);
 
         // Verifichiamo che deviceToken sia una stringa non vuota (per soddisfare il tipo non-empty-string)
         Assert::stringNotEmpty($deviceToken, 'Il token del dispositivo non può essere vuoto');
         
         $message = CloudMessage::withTarget('token', $deviceToken)
             ->withHighestPossiblePriority()
-            ->withData($pushData);
+            ->withData($messageData);
             
         try {
             // Otteniamo l'istanza di messaging e verifichiamo che sia valida
